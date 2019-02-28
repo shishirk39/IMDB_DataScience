@@ -1,0 +1,39 @@
+import pandas as pd
+df = pd.read_csv('imdbEr.csv')
+
+csvFileWords = df.words
+csvFilePolarity=df.polarity
+
+
+def getPositiveWords():
+    for i in range (0,89527):
+        if(csvFilePolarity[i]>=1):
+            print(csvFileWords[i]," ",csvFilePolarity[i])
+            
+
+def getNegativeWords():
+    for i in range (0,89527):
+        if(csvFilePolarity[i]<=-1):
+            print(csvFileWords[i]," ",csvFilePolarity[i])
+
+def getPositiveFinal():
+    for i in range (0,89527):
+        if(csvFilePolarity[i]>=1):
+            print(csvFileWords[i])
+def getNegativeFinal():
+    for i in range (0,89527):
+        if(csvFilePolarity[i]<=-1):
+            print(csvFileWords[i])             
+
+
+def pivot():
+    print("1. Positive Words    2. Negative Words ")
+    choice = input("enter Your Choice : ")
+    if(choice=='1'):
+        getPositiveFinal()
+    elif (choice=='2'):
+        getNegativeFinal()
+    
+    
+
+pivot()
