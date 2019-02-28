@@ -1,0 +1,31 @@
+from textblob import TextBlob
+
+def getResult(stringcoming):
+    stringProcessed= stringcoming.split()
+    totalpolarity=0
+    for i in stringProcessed:
+        senti = TextBlob(i) 
+        totalpolarity += senti.sentiment.polarity
+    
+    if(totalpolarity>0):
+        print('Positive Review')
+    elif(totalpolarity<0):
+        print('Negative Review')
+    else:
+        print('Neutral Review')
+    
+
+
+def pivot():
+    print("1. input text   2. enter file name(.txt)")
+    choice=input('enter your choice : ')
+    if(choice =='1'):
+        user_text = input("Enter movie review : ")
+        getResult(user_text)
+    elif(choice=='2'):
+        userfilename=input("Enter file name in same folder: ")
+        f=open(userfilename)
+        filecontents=f.read()
+        getResult(filecontents)
+
+pivot()
