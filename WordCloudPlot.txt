@@ -1,0 +1,44 @@
+def plotingFun(d):
+    import matplotlib.pyplot as plt
+    from wordcloud import WordCloud
+
+    wordcloud = WordCloud()
+    wordcloud.generate_from_frequencies(frequencies=d)
+    plt.figure()
+    plt.imshow(wordcloud, interpolation="bilinear")
+    plt.axis("off")
+    plt.show()
+
+def positivePlot():
+    d = {}
+    for i in range (0,89527):
+        if(csvFilePolarity[i]>=1):
+            d[csvFileWords[i]]=csvFileFrequency[i]
+    plotingFun(d)     
+
+
+def negativePlot():
+    d = {}
+    for i in range (0,89527):
+        if(csvFilePolarity[i]<=-1):
+            d[csvFileWords[i]]=csvFileFrequency[i]
+    plotingFun(d)       
+
+import pandas as pd
+df = pd.read_csv('bag.csv')
+df2= pd.read_csv('movie_processed.csv')
+csvFileWords = df2.words
+csvFilePolarity=df2.polarity
+csvFileFrequency=df2.frequency
+
+def pivot():
+    print("1. Positive WordCloud    2. Negative WordCloud ")
+    choice = input("enter Your Choice : ")
+    if(choice=='1'):
+            positivePlot()
+    elif (choice=='2'):
+            negativePlot()
+
+
+
+pivot()

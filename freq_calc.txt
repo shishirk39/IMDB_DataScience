@@ -1,0 +1,32 @@
+import pandas as pd
+df1 = pd.read_csv('labeledBow.csv')
+df1
+csvFileall1 = df1.allthing
+
+for i in range (0,25000):
+    csvFileall1[i]=csvFileall1[i][2:]
+    
+for i in range (0,25000):
+    csvFileall1[i]=csvFileall1[i].strip()
+    
+import re
+for i in range (0,25000):
+    csvFileall1[i]=re.sub("[ ]", ",", csvFileall1[i])
+    
+print (csvFileall1)
+
+
+dictionary_second1={}
+for i in range (0,25000):
+    temp_array1=csvFileall1[i].split(',')
+    dictionary_second1[i]=dict(map(int, x.split(':')) for x in temp_array1)
+dictionary_second1
+
+
+frequency_array1=[0]*89527
+for x, y in dictionary_second1.items():
+    for e,f in y.items():
+        frequency_array1[e]+=f;
+        
+        
+pd.DataFrame(frequency_array1).to_csv("frequency1.csv")
